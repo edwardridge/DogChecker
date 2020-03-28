@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "C:\\Users\\Edward Ridge\\.virtualenvs\\DogChecker-ow5X0hTr\\Scripts\\python.exe",
+    "python.testing.pytestArgs": [
+        "--exitfirst",
+        "--verbose"
+    ],
+    "python.testing.unittestEnabled": true,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}

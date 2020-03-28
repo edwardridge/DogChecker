@@ -19,11 +19,11 @@ def sendEmail(urlLink):
         server.login("dogchekerthorpebank@gmail.com", password)
         # TODO: Send email here
         sender_email = "dogchekerthorpebank@gmail.com"
-        receiver_email = "edwardridge@gmail.com"
+        receiver_email = ["bronacanavan20@gmail.com","edwardridge@gmail.com"]
         message = MIMEMultipart("alternative")
         message["Subject"] = "POTENTIAL NEW DOG"
         message["From"] = sender_email
-        message["To"] = receiver_email
+        message["To"] = ", ".join(receiver_email)
 
         text = urlLink
         part1 = MIMEText(text, "plain")
@@ -31,24 +31,31 @@ def sendEmail(urlLink):
 
         server.sendmail(sender_email, receiver_email, message.as_string())
 
-def repeatDogCheck(urll, textToSearch):
-    previousCount = 0
+def repeatDogCheck(urls, textToSearch):
+    previousCount = 10000
     while True:
-        dogCount = checkDogCount(urll, textToSearch)
-
+        dogCount = 0
+        for url in urls:
+             dogCount += checkDogCount(url, textToSearch)
+       
         if dogCount > previousCount:
-            sendEmail(urll)
-            sys.stdout.write("POTENTIAL NEW DOG")
+            sendEmail(", ".join(urls))
+            sys.stdout.write(f"POTENTIAL NEW DOG: {dogCount}")
+            sys.stdout.flush()
             previousCount = dogCount
         if dogCount < previousCount:
+            sys.stdout.write(f"Dog count changed: {dogCount}")
+            sys.stdout.flush()
             previousCount = dogCount
 
-        time.sleep(5)
+        sys.stdout.write(f"-")
+        sys.stdout.flush()
+        time.sleep(30)
     
 def main():
-    urll = "https://www.pets4homes.co.uk/search/?type_id=3&advert_type=1&location=london&distance=30&results=10&sort=creatednew"
+    urls = ["https://www.pets4homes.co.uk/search/?type_id=3&advert_type=1&location=london&distance=30&results=10&sort=creatednew"]
     textToSearch = "poo"
-    repeatDogCheck(urll, textToSearch)
+    repeatDogCheck(urls, textToSearch)
   
 if __name__== "__main__":
   main()
