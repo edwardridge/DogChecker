@@ -13,15 +13,14 @@ def checkDogCount(urll, textToSearch):
 def sendEmail(urlLink):
     port = 465  # For SSL
     password = "dogchecker"
-    # Create a secure SSL context
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
         server.login("dogchekerthorpebank@gmail.com", password)
-        # TODO: Send email here
+        
         sender_email = "dogchekerthorpebank@gmail.com"
         receiver_email = ["bronacanavan20@gmail.com","edwardridge@gmail.com"]
         message = MIMEMultipart("alternative")
-        message["Subject"] = "POTENTIAL NEW DOG"
+        message["Subject"] = "WOOF WOOF POTENTIAL NEW DOG"
         message["From"] = sender_email
         message["To"] = ", ".join(receiver_email)
 
@@ -40,7 +39,7 @@ def repeatDogCheck(urls, textToSearch):
        
         if dogCount > previousCount:
             sendEmail(", ".join(urls))
-            sys.stdout.write(f"POTENTIAL NEW DOG: {dogCount}")
+            sys.stdout.write(f"WOOF WOOF POTENTIAL NEW DOG: {dogCount}")
             sys.stdout.flush()
             previousCount = dogCount
         if dogCount < previousCount:
